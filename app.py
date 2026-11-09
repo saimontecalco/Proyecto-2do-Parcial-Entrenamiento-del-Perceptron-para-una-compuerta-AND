@@ -5,6 +5,7 @@ Ejecutar con:  streamlit run app.py
 import pandas as pd
 import streamlit as st
 
+from pdf_generator import generate_pdf
 from perceptron import Perceptron
 
 st.set_page_config(page_title="Perceptrón AND", page_icon="🧠", layout="wide")
@@ -97,6 +98,10 @@ df = pd.DataFrame([
     for e in model.epochs
 ])
 st.dataframe(df, hide_index=True, width="stretch")
+
+# ---------------------------------------------------------------- REQ 5: PDF
+st.download_button("📄 Descargar informe PDF", data=generate_pdf(model),
+                   file_name="informe_perceptron_AND.pdf", mime="application/pdf")
 
 # ---------------------------------------------------------------- REQ 3: procedimiento
 st.subheader("3. Procedimiento matemático paso a paso")
